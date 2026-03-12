@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>AuraSix Creative Lab</title>
+<title>AuraSix Creative Dashboard</title>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
 
@@ -11,29 +11,30 @@
 
 body{
 margin:0;
-font-family:Arial;
+font-family:Arial, sans-serif;
+background:#050010;
 color:white;
-overflow-x:hidden;
-background:black;
 }
 
-/* FUNDO NEON ANIMADO */
+/* ===== HERO ===== */
 
-.bg{
-position:fixed;
-width:100%;
-height:100%;
-z-index:-1;
-background:radial-gradient(circle at 20% 30%, #ff00ff55, transparent 40%),
-radial-gradient(circle at 80% 70%, #00ffff55, transparent 40%),
-radial-gradient(circle at 50% 50%, #ff006655, transparent 40%);
-animation:moveBg 12s infinite alternate;
+.hero{
+padding:60px 20px;
+text-align:center;
+background:radial-gradient(circle,#ff00ff22,#050010);
 }
 
-@keyframes moveBg{
-0%{filter:hue-rotate(0deg);}
-100%{filter:hue-rotate(120deg);}
+.hero h1{
+font-size:38px;
+color:#ff5cff;
+margin:0;
 }
+
+.hero p{
+opacity:0.8;
+}
+
+/* ===== SEÇÕES ===== */
 
 .container{
 max-width:1100px;
@@ -41,20 +42,37 @@ margin:auto;
 padding:30px;
 }
 
-h1{
-text-align:center;
-color:#ff5cff;
+.section{
+background:#0d0222;
+padding:25px;
+border-radius:14px;
+margin-bottom:30px;
 }
 
-.creator{
-background:rgba(255,255,255,0.05);
-padding:20px;
-border-radius:12px;
+/* ===== MOODBOARD ===== */
+
+.moodboard{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(120px,1fr));
+gap:12px;
 }
+
+.mood{
+height:90px;
+border-radius:10px;
+animation:pulse 5s infinite alternate;
+}
+
+@keyframes pulse{
+from{filter:brightness(1);}
+to{filter:brightness(1.6);}
+}
+
+/* ===== FORM ===== */
 
 select,button{
 padding:10px;
-margin:8px;
+margin:8px 5px;
 border-radius:8px;
 border:none;
 }
@@ -66,37 +84,18 @@ cursor:pointer;
 }
 
 .result{
-margin-top:20px;
+margin-top:15px;
 padding:15px;
 background:#12002b;
 border-radius:10px;
 }
 
-/* MOODBOARD DIGITAL */
+/* ===== 3D ===== */
 
-.moodboard{
-display:grid;
-grid-template-columns:repeat(5,1fr);
-gap:10px;
-margin-top:25px;
-}
-
-.block{
-height:80px;
-border-radius:8px;
-animation:pulse 4s infinite alternate;
-}
-
-@keyframes pulse{
-from{filter:brightness(1);}
-to{filter:brightness(1.6);}
-}
-
-/* 3D */
 #preview3d{
-height:380px;
-margin-top:25px;
+height:350px;
 border-radius:12px;
+margin-top:20px;
 }
 
 </style>
@@ -104,66 +103,99 @@ border-radius:12px;
 
 <body>
 
-<div class="bg"></div>
+<div class="hero">
+<h1>AuraSix Creative Direction</h1>
+<p>Painel de criação de experiências imersivas</p>
+</div>
 
 <div class="container">
 
-<h1>AuraSix Creative Lab</h1>
+<!-- MOODBOARD -->
+<div class="section">
+<h2>Moodboard Conceitual</h2>
+<div class="moodboard" id="board"></div>
+</div>
 
-<div class="creator">
+<!-- CRIADOR -->
+<div class="section">
+<h2>Criar Evento</h2>
 
-<select id="vibe">
+<select id="tipo">
+<option>Festival Imersivo</option>
+<option>Evento Premium</option>
+<option>Festa Neon</option>
+<option>Experiência Sensorial</option>
+</select>
+
+<select id="energia">
 <option>Cyber Neon</option>
 <option>Luxury Futurista</option>
 <option>Galáxia Sensorial</option>
-<option>Tech Minimal</option>
+<option>Minimal Tech</option>
 </select>
 
-<button onclick="criar()">Criar Evento Ao Vivo</button>
+<button onclick="criarEvento()">Gerar Conceito</button>
 
 <div id="resultado" class="result">
-Clique para gerar um conceito.
+O conceito do evento aparecerá aqui.
 </div>
 
 </div>
 
-<h2>Moodboard Dinâmico</h2>
-
-<div class="moodboard" id="board"></div>
-
-<h2>Preview do Espaço</h2>
+<!-- PREVIEW 3D -->
+<div class="section">
+<h2>Layout do Evento</h2>
 <div id="preview3d"></div>
+</div>
 
 </div>
 
 <script>
 
-/* MOODBOARD SEM IMAGENS */
+/* ===== MOODBOARD DINÂMICO ===== */
+
 const board=document.getElementById("board");
 
-for(let i=0;i<15;i++){
-let b=document.createElement("div");
-b.className="block";
-b.style.background=`hsl(${Math.random()*360},100%,60%)`;
-board.appendChild(b);
+for(let i=0;i<18;i++){
+let block=document.createElement("div");
+block.className="mood";
+block.style.background=`linear-gradient(45deg,
+hsl(${Math.random()*360},100%,60%),
+hsl(${Math.random()*360},100%,40%)
+)`;
+board.appendChild(block);
 }
 
-/* GERADOR */
-function criar(){
-const conceitos=[
-"Experiência sensorial neon interativa.",
-"Evento audiovisual imersivo AuraSix.",
-"Cenografia tecnológica responsiva.",
-"Ambiente futurista multissensorial."
+/* ===== GERADOR REAL ===== */
+
+const nomes=[
+"AuraPulse","NeonSphere","HyperVision",
+"CosmicFlow","NovaExperience"
 ];
 
-resultado.innerText=
-conceitos[Math.floor(Math.random()*conceitos.length)];
+function criarEvento(){
+
+let tipo=document.getElementById("tipo").value;
+let energia=document.getElementById("energia").value;
+
+let nome=nomes[Math.floor(Math.random()*nomes.length)];
+
+resultado.innerHTML=`
+<h3>${nome}</h3>
+<b>Tipo:</b> ${tipo}<br>
+<b>Estilo:</b> ${energia}<br><br>
+
+Experiência criada pela direção criativa AuraSix,
+com ambientação ${energia.toLowerCase()},
+integração sensorial e narrativa visual imersiva.
+`;
+
 }
 
-/* 3D */
+/* ===== PLANTA 3D ===== */
 
 const scene=new THREE.Scene();
+
 const camera=new THREE.PerspectiveCamera(
 60,
 preview3d.clientWidth/preview3d.clientHeight,
@@ -177,17 +209,34 @@ preview3d.appendChild(renderer.domElement);
 camera.position.set(0,8,10);
 camera.lookAt(0,0,0);
 
-const pista=new THREE.Mesh(
-new THREE.CircleGeometry(3,32),
-new THREE.MeshBasicMaterial({color:0xff00ff})
+const floor=new THREE.Mesh(
+new THREE.PlaneGeometry(14,14),
+new THREE.MeshBasicMaterial({color:0x111122})
 );
 
-pista.rotation.x=-Math.PI/2;
-scene.add(pista);
+floor.rotation.x=-Math.PI/2;
+scene.add(floor);
+
+function area(color,x,z,name){
+
+const mesh=new THREE.Mesh(
+new THREE.BoxGeometry(3,0.3,2),
+new THREE.MeshBasicMaterial({color})
+);
+
+mesh.position.set(x,0.2,z);
+scene.add(mesh);
+}
+
+area(0xff00ff,0,0,"PISTA");
+area(0xff0033,0,-5,"PALCO");
+area(0x00ffff,-4,3,"LOUNGE");
+area(0x00ffff,4,3,"LOUNGE");
+area(0x00ff88,0,6,"ENTRADA");
 
 function animate(){
 requestAnimationFrame(animate);
-pista.material.color.setHSL(Date.now()*0.0002%1,1,0.5);
+scene.rotation.y+=0.002;
 renderer.render(scene,camera);
 }
 
