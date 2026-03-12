@@ -12,15 +12,15 @@
 body{
 margin:0;
 font-family:Arial, sans-serif;
-background:linear-gradient(135deg,#0b001f,#020617);
+background:linear-gradient(135deg,#060012,#020617);
 color:white;
 }
 
 header{
 text-align:center;
-padding:20px;
+padding:22px;
 font-size:26px;
-color:#ff6bff;
+color:#ff4dff;
 border-bottom:2px solid #ff00ff;
 }
 
@@ -32,16 +32,15 @@ padding:25px;
 
 h2{
 color:#ff8cff;
-margin-top:40px;
+margin-top:45px;
 }
 
-/* SLIDES FUTURISTAS */
-
+/* SLIDES */
 .slideshow{
-height:320px;
+height:340px;
+position:relative;
 overflow:hidden;
 border-radius:14px;
-position:relative;
 }
 
 .slideshow img{
@@ -50,7 +49,7 @@ width:100%;
 height:100%;
 object-fit:cover;
 opacity:0;
-transition:opacity 1.2s;
+transition:1.2s;
 }
 
 .slideshow img.active{
@@ -58,16 +57,15 @@ opacity:1;
 }
 
 /* MOODBOARD */
-
 .moodboard{
-display:flex;
-flex-wrap:wrap;
-gap:14px;
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(180px,1fr));
+gap:15px;
 }
 
 .mood{
-width:150px;
-height:150px;
+width:100%;
+height:190px;
 object-fit:cover;
 border-radius:14px;
 transition:.3s;
@@ -75,10 +73,10 @@ transition:.3s;
 
 .mood:hover{
 transform:scale(1.05);
+box-shadow:0 0 20px #ff00ff;
 }
 
 /* 3D */
-
 #preview3d{
 width:100%;
 height:380px;
@@ -87,13 +85,11 @@ border-radius:14px;
 margin-top:20px;
 }
 
-/* GERADOR */
-
 .generator{
+margin-top:20px;
 background:rgba(255,255,255,0.05);
 padding:20px;
 border-radius:12px;
-margin-top:20px;
 }
 
 button{
@@ -103,7 +99,7 @@ padding:12px 22px;
 border-radius:8px;
 color:white;
 cursor:pointer;
-font-size:15px;
+font-size:16px;
 }
 
 .result{
@@ -117,20 +113,20 @@ font-size:18px;
 <body>
 
 <header>
-✨ AuraSix — Direção Criativa
+✨ AuraSix Experience — Direção Criativa
 </header>
 
 <div class="container">
 
-<h2>Eventos Futuristas Imersivos</h2>
+<h2>Experiências Futuristas Imersivas</h2>
 
 <div class="slideshow" id="slides">
 
-<img src="https://picsum.photos/seed/neon1/1200/600" class="active">
-<img src="https://picsum.photos/seed/neon2/1200/600">
-<img src="https://picsum.photos/seed/neon3/1200/600">
-<img src="https://picsum.photos/seed/neon4/1200/600">
-<img src="https://picsum.photos/seed/neon5/1200/600">
+<img src="https://images.unsplash.com/photo-1470229722913-7c0e2dbbafd3" class="active">
+<img src="https://images.unsplash.com/photo-1514525253161-7a46d19cd819">
+<img src="https://images.unsplash.com/photo-1506157786151-b8491531f063">
+<img src="https://images.unsplash.com/photo-1492684223066-81342ee5ff30">
+<img src="https://images.unsplash.com/photo-1505236858219-8359eb29e329">
 
 </div>
 
@@ -141,21 +137,18 @@ font-size:18px;
 
 <div class="moodboard">
 
-<img class="mood" src="https://picsum.photos/seed/future1/300/300">
-<img class="mood" src="https://picsum.photos/seed/future2/300/300">
-<img class="mood" src="https://picsum.photos/seed/future3/300/300">
-<img class="mood" src="https://picsum.photos/seed/future4/300/300">
-<img class="mood" src="https://picsum.photos/seed/future5/300/300">
-<img class="mood" src="https://picsum.photos/seed/future6/300/300">
-<img class="mood" src="https://picsum.photos/seed/future7/300/300">
-<img class="mood" src="https://picsum.photos/seed/future8/300/300">
-<img class="mood" src="https://picsum.photos/seed/future9/300/300">
-<img class="mood" src="https://picsum.photos/seed/future10/300/300">
-<img class="mood" src="https://picsum.photos/seed/future11/300/300">
-<img class="mood" src="https://picsum.photos/seed/future12/300/300">
-<img class="mood" src="https://picsum.photos/seed/future13/300/300">
-<img class="mood" src="https://picsum.photos/seed/future14/300/300">
-<img class="mood" src="https://picsum.photos/seed/future15/300/300">
+<img class="mood" src="https://images.unsplash.com/photo-1470229722913-7c0e2dbbafd3">
+<img class="mood" src="https://images.unsplash.com/photo-1514525253161-7a46d19cd819">
+<img class="mood" src="https://images.unsplash.com/photo-1506157786151-b8491531f063">
+<img class="mood" src="https://images.unsplash.com/photo-1505236858219-8359eb29e329">
+<img class="mood" src="https://images.unsplash.com/photo-1507874457470-272b3c8d8ee2">
+<img class="mood" src="https://images.unsplash.com/photo-1464375117522-1311dd6d0cd2">
+<img class="mood" src="https://images.unsplash.com/photo-1503424886307-b090341d25d1">
+<img class="mood" src="https://images.unsplash.com/photo-1521335629791-ce4aec67dd47">
+<img class="mood" src="https://images.unsplash.com/photo-1505373877841-8d25f7d46678">
+<img class="mood" src="https://images.unsplash.com/photo-1461784121038-f088ca1e7714">
+<img class="mood" src="https://images.unsplash.com/photo-1504384308090-c894fdcc538d">
+<img class="mood" src="https://images.unsplash.com/photo-1492724441997-5dc865305da7">
 
 </div>
 
@@ -172,7 +165,7 @@ Clique para gerar uma experiência.
 
 <script>
 
-/* SLIDES AUTOMÁTICOS */
+/* SLIDES */
 let slides=document.querySelectorAll("#slides img");
 let i=0;
 
@@ -182,27 +175,22 @@ i=(i+1)%slides.length;
 slides[i].classList.add("active");
 },3000);
 
-/* GERADOR */
+/* CONCEITOS */
 const conceitos=[
-"Experiência sensorial neon com narrativa imersiva.",
-"Evento cyber-futurista com cenografia digital interativa.",
-"Ambiente audiovisual imersivo com identidade AuraSix.",
-"Festival tecnológico com iluminação responsiva."
+"Experiência neon sensorial com interação digital.",
+"Evento imersivo cyber-futurista AuraSix.",
+"Cenografia audiovisual com narrativa tecnológica.",
+"Festival jovem com ambiente multisensorial."
 ];
 
 function gerar(){
 resultado.innerText=conceitos[Math.floor(Math.random()*conceitos.length)];
 }
 
-/* ===== PREVIEW 3D ===== */
+/* ===== 3D ===== */
 
 const scene=new THREE.Scene();
-
-const camera=new THREE.PerspectiveCamera(
-60,
-preview3d.clientWidth/preview3d.clientHeight,
-0.1,1000
-);
+const camera=new THREE.PerspectiveCamera(60,preview3d.clientWidth/preview3d.clientHeight,0.1,1000);
 
 const renderer=new THREE.WebGLRenderer();
 renderer.setSize(preview3d.clientWidth,preview3d.clientHeight);
@@ -218,25 +206,23 @@ new THREE.MeshBasicMaterial({color:0x111122})
 floor.rotation.x=-Math.PI/2;
 scene.add(floor);
 
-function label(txt,x,z){
+function label(text,x,z){
 const canvas=document.createElement("canvas");
 const ctx=canvas.getContext("2d");
 canvas.width=256;
 canvas.height=128;
 ctx.fillStyle="white";
 ctx.font="28px Arial";
-ctx.fillText(txt,20,70);
+ctx.fillText(text,20,70);
 
 const texture=new THREE.CanvasTexture(canvas);
-const sprite=new THREE.Sprite(
-new THREE.SpriteMaterial({map:texture})
-);
+const sprite=new THREE.Sprite(new THREE.SpriteMaterial({map:texture}));
+
 sprite.scale.set(2,1,1);
 sprite.position.set(x,1,z);
 scene.add(sprite);
 }
 
-/* pista */
 const pista=new THREE.Mesh(
 new THREE.CircleGeometry(3,32),
 new THREE.MeshBasicMaterial({color:0xff00ff})
@@ -245,7 +231,6 @@ pista.rotation.x=-Math.PI/2;
 scene.add(pista);
 label("PISTA",0,0);
 
-/* palco */
 const palco=new THREE.Mesh(
 new THREE.BoxGeometry(4,0.3,2),
 new THREE.MeshBasicMaterial({color:0xff0033})
@@ -254,7 +239,6 @@ palco.position.set(0,0.2,-5);
 scene.add(palco);
 label("PALCO",0,-5);
 
-/* lounges */
 [-4,4].forEach(x=>{
 let lounge=new THREE.Mesh(
 new THREE.BoxGeometry(2,0.2,2),
@@ -265,7 +249,6 @@ scene.add(lounge);
 label("LOUNGE",x,3);
 });
 
-/* entrada */
 const entrada=new THREE.Mesh(
 new THREE.BoxGeometry(2,0.2,1),
 new THREE.MeshBasicMaterial({color:0x00ff88})
