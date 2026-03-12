@@ -13,6 +13,7 @@ font-family:Arial, sans-serif;
 background:linear-gradient(135deg,#1a0033,#0b0b16);
 color:white;
 transition:0.6s;
+overflow-x:hidden;
 }
 
 header{
@@ -23,14 +24,14 @@ border-bottom:2px solid #a855f7;
 }
 
 .container{
-padding:25px;
-max-width:1100px;
+max-width:1200px;
 margin:auto;
+padding:25px;
 }
 
 h2{
-margin-top:40px;
 color:#d8b4fe;
+margin-top:40px;
 }
 
 /* PALETAS */
@@ -42,49 +43,91 @@ flex-wrap:wrap;
 }
 
 .palette{
-width:120px;
-height:60px;
-border-radius:10px;
+width:130px;
+height:65px;
+border-radius:12px;
 cursor:pointer;
 display:flex;
 align-items:center;
 justify-content:center;
-font-size:12px;
 font-weight:bold;
+font-size:13px;
 }
 
-/* DECORAÇÃO */
+/* SLIDESHOW EVENTOS */
 
-.cards{
-display:grid;
-grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
-gap:20px;
+.slideshow{
+width:100%;
+height:300px;
+border-radius:14px;
+overflow:hidden;
 margin-top:20px;
+position:relative;
 }
 
-.card{
+.slideshow img{
+width:100%;
+height:100%;
+object-fit:cover;
+position:absolute;
+opacity:0;
+transition:opacity 1s;
+}
+
+.slideshow img.active{
+opacity:1;
+}
+
+/* MOODBOARD */
+
+.moodboard{
+display:flex;
+flex-wrap:wrap;
+gap:15px;
+margin-top:20px;
+min-height:200px;
+}
+
+.mood{
+width:150px;
+height:150px;
+border-radius:12px;
+cursor:grab;
+object-fit:cover;
+}
+
+/* CONCEITO IA */
+
+.generator{
+margin-top:20px;
 background:rgba(255,255,255,0.05);
 padding:20px;
 border-radius:12px;
-backdrop-filter:blur(10px);
-transition:0.3s;
 }
 
-.card:hover{
-transform:scale(1.05);
+button{
+padding:12px 20px;
+background:#a855f7;
+border:none;
+color:white;
+border-radius:8px;
+cursor:pointer;
+margin-top:10px;
 }
 
-.process{
-margin-top:20px;
-line-height:1.8;
-background:rgba(255,255,255,0.05);
-padding:20px;
-border-radius:12px;
+button:hover{
+background:#c084fc;
+}
+
+.result{
+margin-top:15px;
+font-size:17px;
+line-height:1.6;
 }
 
 .footer{
 text-align:center;
-margin-top:40px;
+margin-top:50px;
 opacity:0.6;
 }
 
@@ -104,35 +147,47 @@ opacity:0.6;
 <div class="palette-container">
 
 <div class="palette" style="background:linear-gradient(45deg,#9333ea,#ec4899)"
-onclick="mudarTema('luxo')">Luxo</div>
+onclick="tema('luxo')">Luxo</div>
 
 <div class="palette" style="background:linear-gradient(45deg,#06b6d4,#22c55e)"
-onclick="mudarTema('natureza')">Natureza</div>
+onclick="tema('natureza')">Natureza</div>
 
 <div class="palette" style="background:linear-gradient(45deg,#f59e0b,#ef4444)"
-onclick="mudarTema('festival')">Festival</div>
+onclick="tema('festival')">Festival</div>
 
 <div class="palette" style="background:linear-gradient(45deg,#6366f1,#a855f7)"
-onclick="mudarTema('corporativo')">Corporativo</div>
+onclick="tema('corporativo')">Corporativo</div>
 
 </div>
 
-<h2>Ideias de Decoração</h2>
+<h2>Eventos Inspiracionais</h2>
 
-<div class="cards" id="decoracao">
-
-<div class="card">Selecione uma paleta para visualizar o conceito criativo.</div>
-
+<div class="slideshow" id="slideshow">
+<img src="https://images.unsplash.com/photo-1511578314322-379afb476865" class="active">
+<img src="https://images.unsplash.com/photo-1492684223066-81342ee5ff30">
+<img src="https://images.unsplash.com/photo-1505236858219-8359eb29e329">
+<img src="https://images.unsplash.com/photo-1470229722913-7c0e2dbbafd3">
 </div>
 
-<h2>Processo da Diretora Criativa</h2>
+<h2>Moodboard Criativo (arraste as imagens)</h2>
 
-<div class="process">
-💡 Pesquisa de referências e tendências<br>
-🎯 Definição do conceito do evento<br>
-🎨 Construção da identidade visual<br>
-✨ Desenvolvimento da experiência sensorial<br>
-🚀 Transformação do espaço em experiência memorável
+<div class="moodboard" id="board">
+<img src="https://images.unsplash.com/photo-1505236858219-8359eb29e329" class="mood" draggable="true">
+<img src="https://images.unsplash.com/photo-1492724441997-5dc865305da7" class="mood" draggable="true">
+<img src="https://images.unsplash.com/photo-1521335629791-ce4aec67dd47" class="mood" draggable="true">
+<img src="https://images.unsplash.com/photo-1470229722913-7c0e2dbbafd3" class="mood" draggable="true">
+</div>
+
+<h2>Gerador de Conceito Criativo</h2>
+
+<div class="generator">
+
+<button onclick="gerar()">Gerar Conceito</button>
+
+<div class="result" id="resultado">
+Clique para gerar um conceito criativo automaticamente.
+</div>
+
 </div>
 
 <div class="footer">
@@ -143,47 +198,66 @@ AuraSix Experience © Creative Direction
 
 <script>
 
-function mudarTema(tipo){
+/* TROCAR TEMA */
 
-const body=document.body;
-const decoracao=document.getElementById("decoracao");
+function tema(tipo){
 
-if(tipo==="luxo"){
-body.style.background="linear-gradient(135deg,#1a0033,#3b0764)";
-decoracao.innerHTML=`
-<div class="card">✨ Iluminação dourada e roxa</div>
-<div class="card">🪩 Elementos metálicos e espelhos</div>
-<div class="card">🍸 Lounge premium e sofás elegantes</div>
-<div class="card">💜 Experiência sensorial sofisticada</div>`;
+if(tipo==="luxo")
+document.body.style.background="linear-gradient(135deg,#1a0033,#3b0764)";
+
+if(tipo==="natureza")
+document.body.style.background="linear-gradient(135deg,#022c22,#065f46)";
+
+if(tipo==="festival")
+document.body.style.background="linear-gradient(135deg,#7c2d12,#ef4444)";
+
+if(tipo==="corporativo")
+document.body.style.background="linear-gradient(135deg,#111827,#4c1d95)";
 }
 
-if(tipo==="natureza"){
-body.style.background="linear-gradient(135deg,#022c22,#065f46)";
-decoracao.innerHTML=`
-<div class="card">🌿 Plantas naturais e madeira</div>
-<div class="card">💡 Luz quente e ambiente acolhedor</div>
-<div class="card">🍃 Decoração orgânica</div>
-<div class="card">🌎 Experiência sustentável</div>`;
-}
+/* SLIDES AUTOMÁTICOS */
 
-if(tipo==="festival"){
-body.style.background="linear-gradient(135deg,#7c2d12,#ef4444)";
-decoracao.innerHTML=`
-<div class="card">🎶 Neon e cores vibrantes</div>
-<div class="card">🎧 Espaços instagramáveis</div>
-<div class="card">✨ LEDs e projeções visuais</div>
-<div class="card">🔥 Energia jovem e imersiva</div>`;
-}
+let slides=document.querySelectorAll("#slideshow img");
+let index=0;
 
-if(tipo==="corporativo"){
-body.style.background="linear-gradient(135deg,#111827,#4c1d95)";
-decoracao.innerHTML=`
-<div class="card">🏢 Design minimalista</div>
-<div class="card">💼 Identidade elegante</div>
-<div class="card">📊 Espaços estratégicos de networking</div>
-<div class="card">✨ Experiência profissional premium</div>`;
-}
+setInterval(()=>{
+slides[index].classList.remove("active");
+index=(index+1)%slides.length;
+slides[index].classList.add("active");
+},3000);
 
+/* MOODBOARD ARRASTÁVEL */
+
+let dragged;
+
+document.querySelectorAll(".mood").forEach(img=>{
+img.addEventListener("dragstart",()=>dragged=img);
+});
+
+document.getElementById("board").addEventListener("dragover",e=>e.preventDefault());
+
+document.getElementById("board").addEventListener("drop",e=>{
+e.preventDefault();
+if(e.target.classList.contains("mood")){
+let tempSrc=e.target.src;
+e.target.src=dragged.src;
+dragged.src=tempSrc;
+}
+});
+
+/* GERADOR DE CONCEITO */
+
+const conceitos=[
+"Experiência imersiva com iluminação sensorial e identidade premium.",
+"Evento jovem com estética vibrante, interação social e energia dinâmica.",
+"Ambiente corporativo elegante focado em networking estratégico.",
+"Experiência natural com elementos orgânicos e atmosfera acolhedora.",
+"Evento futurista com tecnologia, luz e narrativa visual envolvente."
+];
+
+function gerar(){
+let random=Math.floor(Math.random()*conceitos.length);
+document.getElementById("resultado").innerText=conceitos[random];
 }
 
 </script>
