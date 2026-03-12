@@ -5,7 +5,6 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>AuraLab Creative Studio</title>
 
-<!-- THREE.JS (3D) -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
 
 <style>
@@ -15,7 +14,6 @@ margin:0;
 font-family:Arial, sans-serif;
 background:linear-gradient(135deg,#12002b,#020617);
 color:white;
-transition:0.6s;
 overflow-x:hidden;
 }
 
@@ -24,7 +22,6 @@ text-align:center;
 padding:20px;
 font-size:24px;
 border-bottom:2px solid #ff00ff;
-letter-spacing:1px;
 }
 
 .container{
@@ -38,7 +35,7 @@ color:#ff7bff;
 margin-top:40px;
 }
 
-/* SLIDES FUTURISTAS */
+/* SLIDES */
 
 .slideshow{
 height:320px;
@@ -98,20 +95,18 @@ border:none;
 color:white;
 border-radius:8px;
 cursor:pointer;
-margin-top:10px;
 }
 
 .result{
 margin-top:15px;
-font-size:17px;
 line-height:1.6;
 }
 
-/* 3D PREVIEW */
+/* 3D */
 
 #preview3d{
 width:100%;
-height:350px;
+height:380px;
 border-radius:14px;
 margin-top:20px;
 background:black;
@@ -129,47 +124,46 @@ opacity:0.6;
 <body>
 
 <header>
-🎨 AuraLab | Futuristic Creative Direction
+🎨 AuraLab | Creative Direction — AuraSix
 </header>
 
 <div class="container">
 
-<h2>Eventos Imersivos AuraSix</h2>
+<h2>Eventos Futuristas & Imersivos</h2>
 
 <div class="slideshow" id="slideshow">
 
-<img src="https://images.unsplash.com/photo-1514525253161-7a46d19cd819" class="active">
-<img src="https://images.unsplash.com/photo-1470229722913-7c0e2dbbafd3">
+<img src="https://images.unsplash.com/photo-1521334884684-d80222895322" class="active">
+<img src="https://images.unsplash.com/photo-1540039155733-5bb30b53aa14">
+<img src="https://images.unsplash.com/photo-1514525253161-7a46d19cd819">
 <img src="https://images.unsplash.com/photo-1506157786151-b8491531f063">
-<img src="https://images.unsplash.com/photo-1492684223066-81342ee5ff30">
-<img src="https://images.unsplash.com/photo-1505236858219-8359eb29e329">
+<img src="https://images.unsplash.com/photo-1470229722913-7c0e2dbbafd3">
 
 </div>
 
-<h2>Preview 3D do Evento</h2>
+<h2>Preview 3D — Planta do Evento</h2>
 
 <div id="preview3d"></div>
 
-<h2>Moodboard Criativo</h2>
+<h2>Moodboard Criativo AuraSix</h2>
 
 <div class="moodboard" id="board">
 
-<!-- 15+ imagens -->
 <img src="https://images.unsplash.com/photo-1514525253161-7a46d19cd819" class="mood" draggable="true">
+<img src="https://images.unsplash.com/photo-1540039155733-5bb30b53aa14" class="mood" draggable="true">
+<img src="https://images.unsplash.com/photo-1521334884684-d80222895322" class="mood" draggable="true">
 <img src="https://images.unsplash.com/photo-1506157786151-b8491531f063" class="mood" draggable="true">
 <img src="https://images.unsplash.com/photo-1470229722913-7c0e2dbbafd3" class="mood" draggable="true">
 <img src="https://images.unsplash.com/photo-1492684223066-81342ee5ff30" class="mood" draggable="true">
 <img src="https://images.unsplash.com/photo-1505236858219-8359eb29e329" class="mood" draggable="true">
-<img src="https://images.unsplash.com/photo-1503424886307-b090341d25d1" class="mood" draggable="true">
 <img src="https://images.unsplash.com/photo-1505373877841-8d25f7d46678" class="mood" draggable="true">
-<img src="https://images.unsplash.com/photo-1521335629791-ce4aec67dd47" class="mood" draggable="true">
-<img src="https://images.unsplash.com/photo-1492724441997-5dc865305da7" class="mood" draggable="true">
+<img src="https://images.unsplash.com/photo-1503424886307-b090341d25d1" class="mood" draggable="true">
 <img src="https://images.unsplash.com/photo-1507874457470-272b3c8d8ee2" class="mood" draggable="true">
 <img src="https://images.unsplash.com/photo-1464375117522-1311dd6d0cd2" class="mood" draggable="true">
 <img src="https://images.unsplash.com/photo-1504384308090-c894fdcc538d" class="mood" draggable="true">
-<img src="https://images.unsplash.com/photo-1508609349937-5ec4ae374ebf" class="mood" draggable="true">
 <img src="https://images.unsplash.com/photo-1489515217757-5fd1be406fef" class="mood" draggable="true">
 <img src="https://images.unsplash.com/photo-1461784121038-f088ca1e7714" class="mood" draggable="true">
+<img src="https://images.unsplash.com/photo-1521335629791-ce4aec67dd47" class="mood" draggable="true">
 
 </div>
 
@@ -190,7 +184,7 @@ AuraSix Experience © Creative Direction
 
 <script>
 
-/* SLIDES AUTOMÁTICOS */
+/* SLIDES */
 
 let slides=document.querySelectorAll("#slideshow img");
 let index=0;
@@ -199,9 +193,9 @@ setInterval(()=>{
 slides[index].classList.remove("active");
 index=(index+1)%slides.length;
 slides[index].classList.add("active");
-},3000);
+},3200);
 
-/* MOODBOARD DRAG */
+/* DRAG MOODBOARD */
 
 let dragged;
 
@@ -209,9 +203,9 @@ document.querySelectorAll(".mood").forEach(img=>{
 img.addEventListener("dragstart",()=>dragged=img);
 });
 
-document.getElementById("board").addEventListener("dragover",e=>e.preventDefault());
+board.addEventListener("dragover",e=>e.preventDefault());
 
-document.getElementById("board").addEventListener("drop",e=>{
+board.addEventListener("drop",e=>{
 e.preventDefault();
 if(e.target.classList.contains("mood")){
 let temp=e.target.src;
@@ -220,51 +214,81 @@ dragged.src=temp;
 }
 });
 
-/* GERADOR DE CONCEITO */
+/* GERADOR */
 
 const conceitos=[
-"Experiência neon imersiva com luzes reativas e narrativa sensorial.",
-"Evento futurista com projeções digitais e atmosfera cyber premium.",
-"Ambiente multisensorial com cores vibrantes e interação tecnológica.",
-"Experiência audiovisual imersiva inspirada em festivais internacionais.",
-"Evento AuraSix com identidade visual dinâmica e energia imersiva."
+"Evento neon imersivo com iluminação reativa e narrativa sensorial.",
+"Experiência futurista audiovisual com estética cyber premium.",
+"Ambiente multisensorial com cores vibrantes e interação digital.",
+"Festival imersivo com identidade visual dinâmica AuraSix.",
+"Experiência tecnológica com cenografia luminosa e atmosfera imersiva."
 ];
 
 function gerar(){
-let r=Math.floor(Math.random()*conceitos.length);
-document.getElementById("resultado").innerText=conceitos[r];
+resultado.innerText=conceitos[Math.floor(Math.random()*conceitos.length)];
 }
 
-/* PREVIEW 3D */
+/* PREVIEW 3D PLANTA DO EVENTO */
 
 const scene=new THREE.Scene();
-const camera=new THREE.PerspectiveCamera(75,
-document.getElementById("preview3d").clientWidth/
-document.getElementById("preview3d").clientHeight,
-0.1,1000);
+const camera=new THREE.PerspectiveCamera(60,preview3d.clientWidth/preview3d.clientHeight,0.1,1000);
 
 const renderer=new THREE.WebGLRenderer();
-renderer.setSize(
-document.getElementById("preview3d").clientWidth,
-document.getElementById("preview3d").clientHeight
+renderer.setSize(preview3d.clientWidth,preview3d.clientHeight);
+preview3d.appendChild(renderer.domElement);
+
+camera.position.set(0,8,10);
+camera.lookAt(0,0,0);
+
+/* piso */
+const floor=new THREE.Mesh(
+new THREE.PlaneGeometry(12,12),
+new THREE.MeshBasicMaterial({color:0x111122})
 );
+floor.rotation.x=-Math.PI/2;
+scene.add(floor);
 
-document.getElementById("preview3d").appendChild(renderer.domElement);
+/* pista central */
+const pista=new THREE.Mesh(
+new THREE.CircleGeometry(2.5,32),
+new THREE.MeshBasicMaterial({color:0xff00ff})
+);
+pista.rotation.x=-Math.PI/2;
+scene.add(pista);
 
-const geometry=new THREE.TorusKnotGeometry(1,0.3,100,16);
-const material=new THREE.MeshBasicMaterial({color:0xff00ff,wireframe:true});
-const knot=new THREE.Mesh(geometry,material);
+/* palco */
+const palco=new THREE.Mesh(
+new THREE.BoxGeometry(3,0.3,1.5),
+new THREE.MeshBasicMaterial({color:0xff0033})
+);
+palco.position.set(0,0.15,-4);
+scene.add(palco);
 
-scene.add(knot);
-camera.position.z=4;
+/* lounges */
+for(let i=-1;i<=1;i+=2){
+let lounge=new THREE.Mesh(
+new THREE.BoxGeometry(2,0.2,2),
+new THREE.MeshBasicMaterial({color:0x00ffff})
+);
+lounge.position.set(i*4,0.1,2);
+scene.add(lounge);
+}
+
+/* entradas */
+for(let i=-1;i<=1;i+=2){
+let entrada=new THREE.Mesh(
+new THREE.BoxGeometry(1,0.2,1),
+new THREE.MeshBasicMaterial({color:0x00ff88})
+);
+entrada.position.set(i*5,0.1,-1);
+scene.add(entrada);
+}
 
 function animate(){
 requestAnimationFrame(animate);
-knot.rotation.x+=0.01;
-knot.rotation.y+=0.01;
+scene.rotation.y+=0.002;
 renderer.render(scene,camera);
 }
-
 animate();
 
 </script>
