@@ -3,99 +3,100 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>AuraSix Creative Dashboard</title>
-
-<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+<title>AuraSix | Direção Criativa</title>
 
 <style>
 
 body{
 margin:0;
-font-family:Arial, sans-serif;
-background:#050010;
+font-family:Arial, Helvetica, sans-serif;
+background:#06010f;
 color:white;
 }
 
-/* ===== HERO ===== */
+/* HERO */
 
 .hero{
-padding:60px 20px;
+height:100vh;
+display:flex;
+flex-direction:column;
+justify-content:center;
+align-items:center;
 text-align:center;
-background:radial-gradient(circle,#ff00ff22,#050010);
+background:radial-gradient(circle at center,#ff00ff22,#06010f);
 }
 
 .hero h1{
-font-size:38px;
-color:#ff5cff;
+font-size:42px;
 margin:0;
+color:#ff4dff;
+letter-spacing:2px;
 }
 
 .hero p{
 opacity:0.8;
+max-width:500px;
 }
 
-/* ===== SEÇÕES ===== */
-
-.container{
-max-width:1100px;
-margin:auto;
-padding:30px;
-}
+/* SEÇÕES */
 
 .section{
-background:#0d0222;
-padding:25px;
+max-width:900px;
+margin:60px auto;
+padding:30px;
+background:#0e0222;
 border-radius:14px;
-margin-bottom:30px;
 }
 
-/* ===== MOODBOARD ===== */
+h2{
+color:#ff4dff;
+margin-top:0;
+}
 
-.moodboard{
+/* PILARES */
+
+.pilares{
 display:grid;
-grid-template-columns:repeat(auto-fit,minmax(120px,1fr));
-gap:12px;
+grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+gap:20px;
 }
 
-.mood{
-height:90px;
-border-radius:10px;
-animation:pulse 5s infinite alternate;
+.card{
+background:#160035;
+padding:20px;
+border-radius:12px;
+transition:0.3s;
 }
 
-@keyframes pulse{
-from{filter:brightness(1);}
-to{filter:brightness(1.6);}
+.card:hover{
+transform:translateY(-5px);
+background:#21004d;
 }
 
-/* ===== FORM ===== */
-
-select,button{
-padding:10px;
-margin:8px 5px;
-border-radius:8px;
-border:none;
-}
+/* BOTÃO */
 
 button{
+margin-top:20px;
+padding:12px 20px;
+border:none;
+border-radius:8px;
 background:#ff00ff;
 color:white;
 cursor:pointer;
+font-size:16px;
 }
 
-.result{
-margin-top:15px;
+.resultado{
+margin-top:20px;
 padding:15px;
-background:#12002b;
+background:#14002c;
 border-radius:10px;
 }
 
-/* ===== 3D ===== */
-
-#preview3d{
-height:350px;
-border-radius:12px;
-margin-top:20px;
+footer{
+text-align:center;
+padding:30px;
+opacity:0.6;
 }
 
 </style>
@@ -104,143 +105,73 @@ margin-top:20px;
 <body>
 
 <div class="hero">
-<h1>AuraSix Creative Direction</h1>
-<p>Painel de criação de experiências imersivas</p>
+<h1>AuraSix Experience</h1>
+<p>Direção Criativa focada na criação de experiências imersivas,
+sensoriais e memoráveis.</p>
 </div>
 
-<div class="container">
-
-<!-- MOODBOARD -->
 <div class="section">
-<h2>Moodboard Conceitual</h2>
-<div class="moodboard" id="board"></div>
+<h2>Sobre a Direção Criativa</h2>
+<p>
+A direção criativa da AuraSix transforma eventos em experiências.
+Cada projeto nasce de conceito, identidade visual e narrativa sensorial,
+criando ambientes que conectam emoção, tecnologia e público.
+</p>
 </div>
 
-<!-- CRIADOR -->
 <div class="section">
-<h2>Criar Evento</h2>
+<h2>Pilares Criativos</h2>
 
-<select id="tipo">
-<option>Festival Imersivo</option>
-<option>Evento Premium</option>
-<option>Festa Neon</option>
-<option>Experiência Sensorial</option>
-</select>
+<div class="pilares">
 
-<select id="energia">
-<option>Cyber Neon</option>
-<option>Luxury Futurista</option>
-<option>Galáxia Sensorial</option>
-<option>Minimal Tech</option>
-</select>
+<div class="card">
+<h3>Conceito</h3>
+<p>Criação da identidade e storytelling do evento.</p>
+</div>
 
-<button onclick="criarEvento()">Gerar Conceito</button>
+<div class="card">
+<h3>Experiência</h3>
+<p>Planejamento da jornada emocional do público.</p>
+</div>
 
-<div id="resultado" class="result">
-O conceito do evento aparecerá aqui.
+<div class="card">
+<h3>Ambientação</h3>
+<p>Definição estética, iluminação e atmosfera imersiva.</p>
 </div>
 
 </div>
 
-<!-- PREVIEW 3D -->
+</div>
+
 <div class="section">
-<h2>Layout do Evento</h2>
-<div id="preview3d"></div>
+<h2>Gerador de Conceito Criativo</h2>
+
+<button onclick="gerar()">Criar Conceito AuraSix</button>
+
+<div id="resultado" class="resultado">
+Clique para gerar um conceito criativo.
 </div>
 
 </div>
+
+<footer>
+Direção Criativa • AuraSix Experience
+</footer>
 
 <script>
 
-/* ===== MOODBOARD DINÂMICO ===== */
-
-const board=document.getElementById("board");
-
-for(let i=0;i<18;i++){
-let block=document.createElement("div");
-block.className="mood";
-block.style.background=`linear-gradient(45deg,
-hsl(${Math.random()*360},100%,60%),
-hsl(${Math.random()*360},100%,40%)
-)`;
-board.appendChild(block);
-}
-
-/* ===== GERADOR REAL ===== */
-
-const nomes=[
-"AuraPulse","NeonSphere","HyperVision",
-"CosmicFlow","NovaExperience"
+const conceitos=[
+"Experiência futurista com iluminação neon e interação sensorial.",
+"Evento imersivo baseado em narrativa visual e ambientação tecnológica.",
+"Festival premium com estética cyber e atmosfera energética.",
+"Experiência multisensorial focada em conexão e impacto emocional.",
+"Evento conceitual com identidade visual vibrante e dinâmica."
 ];
 
-function criarEvento(){
-
-let tipo=document.getElementById("tipo").value;
-let energia=document.getElementById("energia").value;
-
-let nome=nomes[Math.floor(Math.random()*nomes.length)];
-
-resultado.innerHTML=`
-<h3>${nome}</h3>
-<b>Tipo:</b> ${tipo}<br>
-<b>Estilo:</b> ${energia}<br><br>
-
-Experiência criada pela direção criativa AuraSix,
-com ambientação ${energia.toLowerCase()},
-integração sensorial e narrativa visual imersiva.
-`;
-
+function gerar(){
+let aleatorio=Math.floor(Math.random()*conceitos.length);
+document.getElementById("resultado").innerHTML=conceitos[aleatorio];
 }
-
-/* ===== PLANTA 3D ===== */
-
-const scene=new THREE.Scene();
-
-const camera=new THREE.PerspectiveCamera(
-60,
-preview3d.clientWidth/preview3d.clientHeight,
-0.1,1000
-);
-
-const renderer=new THREE.WebGLRenderer();
-renderer.setSize(preview3d.clientWidth,preview3d.clientHeight);
-preview3d.appendChild(renderer.domElement);
-
-camera.position.set(0,8,10);
-camera.lookAt(0,0,0);
-
-const floor=new THREE.Mesh(
-new THREE.PlaneGeometry(14,14),
-new THREE.MeshBasicMaterial({color:0x111122})
-);
-
-floor.rotation.x=-Math.PI/2;
-scene.add(floor);
-
-function area(color,x,z,name){
-
-const mesh=new THREE.Mesh(
-new THREE.BoxGeometry(3,0.3,2),
-new THREE.MeshBasicMaterial({color})
-);
-
-mesh.position.set(x,0.2,z);
-scene.add(mesh);
-}
-
-area(0xff00ff,0,0,"PISTA");
-area(0xff0033,0,-5,"PALCO");
-area(0x00ffff,-4,3,"LOUNGE");
-area(0x00ffff,4,3,"LOUNGE");
-area(0x00ff88,0,6,"ENTRADA");
-
-function animate(){
-requestAnimationFrame(animate);
-scene.rotation.y+=0.002;
-renderer.render(scene,camera);
-}
-
-animate();
 
 </script>
 
